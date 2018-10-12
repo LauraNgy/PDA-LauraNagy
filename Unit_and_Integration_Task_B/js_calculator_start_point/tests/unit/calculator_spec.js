@@ -34,5 +34,11 @@ describe('calculator', function () {
     const actual = calculator.runningTotal;
     assert.equal(actual, 3);
   });
+  it('can concatenate multiple number clicks', function(){
+    calculator.numberClick(4);
+    calculator.numberClick(2);
+    const actual = calculator.runningTotal;
+    assert.equal(actual, 42);
+  });
 
 });
