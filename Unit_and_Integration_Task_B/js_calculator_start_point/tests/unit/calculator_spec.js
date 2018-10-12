@@ -21,6 +21,12 @@ describe('calculator', function () {
     calculator.subtract(4);
     const actual = calculator.runningTotal;
     assert.equal(actual, 3);
-  })
+  });
+  it('can perform multiplication', function(){
+    calculator.previousTotal = 3;
+    calculator.multiply(5);
+    const actual = calculator.runningTotal;
+    assert.equal(actual, 15);
+  });
 
 });
