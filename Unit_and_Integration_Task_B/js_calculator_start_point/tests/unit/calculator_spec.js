@@ -40,15 +40,30 @@ describe('calculator', function () {
     const actual = calculator.runningTotal;
     assert.equal(actual, 42);
   });
-  it('can chain multiple operations together', function(){
-    calculator.previousTotal = 3;
-    calculator.multiply(5);
-    calculator.add(4);
-    calculator.subtract(6);
+  it('it can chain multiple operations together', function(){
+    calculator.numberClick(3);
+    calculator.operatorClick('+');
+    calculator.numberClick(7);
+    calculator.operatorClick('-');
+    calculator.numberClick(4);
+    calculator.operatorClick('*');
+    calculator.numberClick(7);
+    calculator.operatorClick('=');
     const actual = calculator.runningTotal;
-    assert.equal(actual, 13);
-  });
-  
+    assert.equal(actual, 42);
+  })
+
+  it('it can clear the running total without affecting the calculation', function(){
+    calculator.numberClick(9);
+    calculator.operatorClick('/');
+    calculator.numberClick(2);
+    calculator.clearClick();
+    calculator.numberClick(3);
+    calculator.operatorClick('=');
+    const actual = calculator.runningTotal;
+    assert.equal(actual, 3)
+  })
+
 
 
 });
