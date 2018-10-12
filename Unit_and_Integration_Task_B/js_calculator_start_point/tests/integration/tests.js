@@ -15,5 +15,75 @@ describe('calculator functionality', function() {
     element(by.css('#number2')).click();
     expect(running_total.getAttribute('value')).to.eventually.equal('2')
   })
+  it('should update the running total display on number button click', function(){
+     running_total = element(by.css('#running_total'));
+     element(by.css('#number4')).click();
+     element(by.css('#number2')).click();
+     expect(running_total.getAttribute('value')).to.eventually.equal('42');
+   })
 
-});
+   it('should update the running total display with result of operation', function(){
+     running_total = element(by.css('#running_total'));
+     element(by.css('#number7')).click();
+     element(by.css('#operator_add')).click();
+     element(by.css('#number3')).click();
+     element(by.css('#operator_add')).click();
+     expect(running_total.getAttribute('value')).to.eventually.equal('10');
+   })
+
+   it('should chain multiple operations', function(){
+     running_total = element(by.css('#running_total'));
+     element(by.css('#number5')).click();
+     element(by.css('#operator_add')).click();
+     element(by.css('#number7')).click();
+     element(by.css('#operator_subtract')).click();
+     element(by.css('#number9')).click();
+     element(by.css('#operator_divide')).click();
+     element(by.css('#number3')).click();
+     element(by.css('#operator_equals')).click();
+     expect(running_total.getAttribute('value')).to.eventually.equal('1');
+   })
+
+   it('should be able to output negative numbers', function(){
+     running_total = element(by.css('#running_total'));
+     element(by.css('#number5')).click();
+     element(by.css('#operator_subtract')).click();
+     element(by.css('#number7')).click();
+     element(by.css('#operator_equals')).click();
+     expect(running_total.getAttribute('value')).to.eventually.equal('-2');
+   })
+
+   it('should be able to output decimals', function(){
+     running_total = element(by.css('#running_total'));
+     element(by.css('#number2')).click();
+     element(by.css('#operator_divide')).click();
+     element(by.css('#number1')).click();
+     element(by.css('#number0')).click();
+     element(by.css('#operator_equals')).click();
+     expect(running_total.getAttribute('value')).to.eventually.equal('0.2');
+   })
+
+   it('should be able to output large numbers', function(){
+     running_total = element(by.css('#running_total'));
+     element(by.css('#number1')).click();
+     element(by.css('#number0')).click();
+     element(by.css('#operator_multiply')).click();
+     element(by.css('#number1')).click();
+     element(by.css('#number0')).click();
+     element(by.css('#operator_multiply')).click();
+     element(by.css('#operator_multiply')).click();
+     element(by.css('#operator_multiply')).click();
+     element(by.css('#operator_multiply')).click();
+     element(by.css('#operator_equals')).click();
+     expect(running_total.getAttribute('value')).to.eventually.equal('1e+32');
+   })
+
+   it('should output Not A Number when a number is divided by zero', function(){
+     running_total = element(by.css('#running_total'));
+     element(by.css('#number1')).click();
+     element(by.css('#operator_divide')).click();
+     element(by.css('#number0')).click();
+     element(by.css('#operator_equals')).click();
+     expect(running_total.getAttribute('value')).to.eventually.equal("Error");
+   })
+ });
