@@ -28,5 +28,11 @@ describe('calculator', function () {
     const actual = calculator.runningTotal;
     assert.equal(actual, 15);
   });
+  it('can perform division', function(){
+    calculator.previousTotal = 21;
+    calculator.divide(7);
+    const actual = calculator.runningTotal;
+    assert.equal(actual, 3);
+  });
 
 });
