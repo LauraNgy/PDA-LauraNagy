@@ -40,5 +40,15 @@ describe('calculator', function () {
     const actual = calculator.runningTotal;
     assert.equal(actual, 42);
   });
+  it('can chain multiple operations together', function(){
+    calculator.previousTotal = 3;
+    calculator.multiply(5);
+    calculator.add(4);
+    calculator.subtract(6);
+    const actual = calculator.runningTotal;
+    assert.equal(actual, 13);
+  });
+  
+
 
 });
